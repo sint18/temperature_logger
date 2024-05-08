@@ -25,10 +25,10 @@ def init_db():
 init_db()
 
 
-@app.route('/log', methods=['POST'])
+@app.route('/log', methods=['GET'])
 def log_data():
-    temperature = request.form['temperature']
-    humidity = request.form['humidity']
+    temperature = request.args.get('temperature')
+    humidity = request.args.get('humidity')
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     cursor.execute('INSERT INTO readings (temperature, humidity) VALUES (?, ?)', (temperature, humidity))
